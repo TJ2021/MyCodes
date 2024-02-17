@@ -1,0 +1,4 @@
+There are a number of students standing in a single file line. Each student is numbered sequentially from 0. Each student also has a binary digit associated with them, where 0 indicate the student's performance is above average and 1 indicates the student's performance is below average.
+The teacher wants to groupe the sudent by performance opposite ends of the line such that the number of adjacent pairs of students where one student is a 0 and the other student is a 1 minimized. To accomplish this, any student can swap places in line with the student located immediately in front of or behind them. Each time a pair of student swap places, it counts as a move. Determine the minimum number of moves needed to create and optimal configuration.
+
+For example, there are n=4 students arranged as avg=[0,1,0,1]. With 1 move, switching students 1 and 2, we get the array [0,0,1,1] which is optimal.
