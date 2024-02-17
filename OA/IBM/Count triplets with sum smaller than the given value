@@ -1,0 +1,20 @@
+Count triplets with sum smaller than the given value
+
+Given an array of distinct integers and a sum value. Find count of triplets with sum smaller than given sum value .
+
+def tripletsCount(arr, val):
+  n = len(arr)
+  count = 0
+  arr.sort()
+  for i in range(n-2):
+    left = i+1
+    right = n-1
+    while(left < right):
+      total = arr[i] + arr[left] + arr[right]
+      if total > val:
+        right -= 1
+      else:
+        count += (right - left)
+        left += 1
+    return count
+      
