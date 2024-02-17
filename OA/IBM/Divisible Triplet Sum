@@ -1,0 +1,27 @@
+2964. Number of Divisible Triplet Sums (Leetcode)
+
+Given a 0-indexed integer array nums and an integer d, return the number of triplets (i, j, k) such that i < j < k and (nums[i] + nums[j] + nums[k]) % d == 0.
+Input: nums = [3,3,4,7,8], d = 5
+Output: 3
+Explanation: The triplets which are divisible by 5 are: (0, 1, 2), (0, 2, 4), (1, 2, 4).
+It can be shown that no other triplet is divisible by 5. Hence, the answer is 3.
+
+
+def divisibleTripletCount(nums:List[int], d: int) -> int:
+Step1: Find remainder of all pairs
+  n  = length(nums)
+  ans = 0
+  d = collections.defaultdict(set)  // set is to unique combinations, else use list for total number of combinations
+  for i in range(n-1):
+    for j in range(i+1, n):
+      key = (nums[i]+ nums[j]) % d
+      d[key].add((i,j))
+
+  Step2 : Linear scan to find triplets
+  for k in range(2,n):
+    rem = nums[k] % d
+    require = (d-rem) % d // if rem = 0 , then d-rem is d. So we need to take modulus
+    ans += sum(1 for (i,j) in d.get(require,[]) if j<k )
+
+  return ans
+    
