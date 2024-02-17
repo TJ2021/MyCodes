@@ -1,0 +1,19 @@
+Count Triplets (Hackerrank)
+
+You are given an array and you need to find number of tripets of indices(i,j,k)  such that the elements at those indices are in geometric progression 
+for a given common ratio r and i<j<k.
+
+def countTriplets(arr, r):
+    prev = {} // To check if a//r available             
+    after = {} // To check if a*r available
+    count = 0
+    for num in arr:
+        after[num] = after.get(num, 0) + 1
+    for a in arr:  // iteration for the middle element
+        after[a] -= 1 // reduce the count as that element is already checked
+        if (a//r in prev) and (a%r == 0) and (a*r in after): 
+            count += prev[a//r] * after[a*r] // Total number of combinations with a as middle element
+
+        prev[a] = prev.get(a, 0) + 1
+        
+    return count
