@@ -1,0 +1,39 @@
+You are given a log file with a list of GET requests delimited with double quotes and spaces.A sample and the structure of the text file containing the log entries are given below.
+Sample log record:
+unicomp6.unicomp.net - - [01/Jul/1995:00:00:06 -0400] "GET /shuttle/countdown/ HTTP/1.0" 200 3985
+
+Log file structure:
+Hostname	-	-	Timestamp	Request	Status	Bytes  eg: unicomp6.unicomp.net	-	-	[01/Jul/1995:00:00:06 -0400]	"GET /shuttle/countdown/ HTTP/1.0"	200	3985
+
+Given a filename that denotes a text file in the current working directory. Create an output file with the name "bytes_" prefixed to the filename (bytes_filename) which stores the information about large responses. Example: filename = "hosts_access_log_00.txt"; process the records in hosts_access_log_00.txt and create an output file named bytes_hosts_access_log_00.txt.
+
+Write the following to the output file:
+The first line must contain the number of requests that have more than 5000 bytes sent in their response.
+The second line must contain the total sum of bytes sent by all responses sending more than 5000 bytes.
+Note: The output file has to be written to the current directory.
+
+Constraints: It is guaranteed that the total number of bytes in the log file does not exceed 2^31.
+
+
+def process_log_file(filename):
+	 # Initialize variables to store results
+    large_requests_count = 0
+    large_bytes_sum = 0
+
+	with open(filename,'r') as f:
+		lines = f.readlines()
+	for line in lines:
+		fields = line.split()
+		bytes_sent = int(fields[-1])
+		if bytes_sent > 5000:
+    	large_requests_count += 1
+      large_bytes_sum += bytes_sent
+
+  # Write results to the output file
+  output_filename = "bytes_" + filename
+  with open(output_filename, 'w') as output_file:
+        # Write the number of requests with more than 5000 bytes
+        output_file.write(str(large_requests_count) + "\n")
+        # Write the total sum of bytes sent by those requests
+        output_file.write(str(large_bytes_sum))
+	
