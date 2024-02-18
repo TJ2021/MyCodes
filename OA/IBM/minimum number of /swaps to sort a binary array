@@ -1,0 +1,13 @@
+minimum number of swaps to sort a binary array
+
+Minimum number of swaps to sort a binary array is sum of number of zeros on right of every 1.
+
+def minSwaps(arr):
+  swapsCount = 0
+  zerosCount = 0
+  for i in range(n-1,-1,-1):
+    if arr[i] == 0:
+      zerosCount += 1
+    else:
+      swapsCount += zersCount
+  return swapsCount
